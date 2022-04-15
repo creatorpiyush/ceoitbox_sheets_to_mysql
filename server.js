@@ -86,12 +86,42 @@ app.delete("/table/:table_name/:id", (req, res) => {
 
 // select data via table name
 app.get("/select/:table_name", (req, res) => {
-  var clause = req.body.key + " = " + `'${req.body.value}'`;
-  var sql = `select * from ${req.params.table_name} where ${clause};`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    return res.status(200).send(result);
-  });
+  let condition = req.body.condition;
+  if (condition == "equal") {
+    var clause = req.body.key + " = " + `'${req.body.value}'`;
+    var sql = `select * from ${req.params.table_name} where ${clause};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      return res.status(200).send(result);
+    });
+  } else if (condition == "greater") {
+    var clause = req.body.key + " > " + `'${req.body.value}'`;
+    var sql = `select * from ${req.params.table_name} where ${clause};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      return res.status(200).send(result);
+    });
+  } else if (condition == "less") {
+    var clause = req.body.key + " < " + `'${req.body.value}'`;
+    var sql = `select * from ${req.params.table_name} where ${clause};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      return res.status(200).send(result);
+    });
+  } else if (condition == "like") {
+    var clause = req.body.key + " like " + `'%${req.body.value}%'`;
+    var sql = `select * from ${req.params.table_name} where ${clause};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      return res.status(200).send(result);
+    });
+  } else {
+    var sql = `select * from ${req.params.table_name};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      return res.status(200).send(result);
+    });
+  }
 });
 
 const PORT = process.env.PORT || 3000;

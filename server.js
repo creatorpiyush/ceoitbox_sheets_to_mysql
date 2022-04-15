@@ -124,6 +124,15 @@ app.get("/select/:table_name", (req, res) => {
   }
 });
 
+// update data via table name
+app.put("/table/update/:table_name", (req, res) => {
+  var sql = `update ${req.params.table_name} set ? where id = ${req.body.id}`;
+  db.query(sql, req.body, (err, result) => {
+    if (err) throw err;
+    return res.status(200).send(result);
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

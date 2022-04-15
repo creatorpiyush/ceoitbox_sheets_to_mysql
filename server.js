@@ -77,7 +77,7 @@ app.post("/table/:table_name", (req, res) => {
 
 // delete data from table-name
 app.delete("/table/delete/:table_name", (req, res) => {
-  var sql = `delete from ${req.params.table_name} where id = ${req.body.toDelete}`;
+  var sql = `delete from ${req.params.table_name} where ${req.body.toDeleteKey} = ${req.body.toDeleteValue}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     return res.status(200).send(result);

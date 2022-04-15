@@ -131,9 +131,9 @@ app.get("/select/:table_name", (req, res) => {
     var clause =
       req.body.key +
       " between " +
-      `'${req.body.value1}'` +
+      `'${req.body.valueGreater}'` +
       " and " +
-      `'${req.body.value2}'`;
+      `'${req.body.valueLess}'`;
     var sql = `select * from ${req.params.table_name} where ${clause};`;
     db.query(sql, (err, result) => {
       if (err) throw err;

@@ -6,6 +6,11 @@ const db = require("./models");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// get
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 // get all tables
 app.get("/show-all-tables", (req, res) => {
   var sql = "show tables";
@@ -52,7 +57,7 @@ app.delete("/delete-column/:tableName", (req, res) => {
 });
 
 // get data via table name
-app.get("/:table_name", (req, res) => {
+app.get("/table/:table_name", (req, res) => {
   var sql = `select * from ${req.params.table_name}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
@@ -61,7 +66,7 @@ app.get("/:table_name", (req, res) => {
 });
 
 // post data via table name
-app.post("/:table_name", (req, res) => {
+app.post("/table/:table_name", (req, res) => {
   var post = req.body;
   var sql = `insert into ${req.params.table_name} set ?`;
   db.query(sql, post, (err, result) => {
@@ -71,7 +76,7 @@ app.post("/:table_name", (req, res) => {
 });
 
 // delete data from table name
-app.delete("/:table_name/:id", (req, res) => {
+app.delete("/table/:table_name/:id", (req, res) => {
   var sql = `delete from ${req.params.table_name} where id = ${req.params.id}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
@@ -89,7 +94,7 @@ app.get("/select/:table_name", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Server is running on port 3000");

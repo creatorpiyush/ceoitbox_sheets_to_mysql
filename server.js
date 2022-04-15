@@ -127,6 +127,19 @@ app.get("/select/:table_name", (req, res) => {
       // return res.status(200).send(result);
       return res.status(200).send("Successfully");
     });
+  } else if (condition == "between") {
+    var clause =
+      req.body.key +
+      " between " +
+      `'${req.body.value1}'` +
+      " and " +
+      `'${req.body.value2}'`;
+    var sql = `select * from ${req.params.table_name} where ${clause};`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      // return res.status(200).send(result);
+      return res.status(200).send("Successfully");
+    });
   } else {
     var sql = `select * from ${req.params.table_name};`;
     db.query(sql, (err, result) => {

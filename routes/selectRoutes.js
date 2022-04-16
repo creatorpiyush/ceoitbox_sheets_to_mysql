@@ -2,7 +2,7 @@ const route = require("express").Router();
 const db = require("../models");
 
 // select data via table name
-route.get("/:table_name", (req, res) => {
+route.post("/:table_name", (req, res) => {
   let condition = req.body.condition;
   if (condition == "equal") {
     var clause = `"${req.body.key}"` + " = " + `'${req.body.value}'`;

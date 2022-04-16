@@ -43,7 +43,7 @@ route.delete("/delete-row/:tableName", (req, res) => {
 
 // update data in table
 route.put("/update/:tableName", (req, res) => {
-  var sql = `update ${req.params.tableName} set ? where id = ${req.body.id}`;
+  var sql = `update ${req.params.tableName} set ? where ${req.body.columnName} = '${req.body.columnValue}`;
   db.query(sql, req.body, (err, result) => {
     if (err) throw err;
     // return res.status(200).send(result);

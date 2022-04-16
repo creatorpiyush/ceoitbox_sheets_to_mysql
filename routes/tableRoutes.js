@@ -6,8 +6,8 @@ route.get("/:tableName", (req, res) => {
   var sql = `select * from ${req.params.tableName}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
-    // return res.status(200).send(result);
-    return res.status(200).send("Successfully");
+    return res.status(200).send(result);
+    // return res.status(200).send("Successfully");
   });
 });
 
@@ -19,6 +19,15 @@ route.post("/:tableName", (req, res) => {
     if (err) throw err;
     // return res.status(200).send(result);
     return res.status(200).send("Successfully");
+  });
+});
+
+// get column names from table
+route.get("/column-name/:tableName", (req, res) => {
+  var sql = `show columns from ${req.params.tableName}`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    return res.status(200).send(result);
   });
 });
 

@@ -33,7 +33,7 @@ route.get("/column-name/:tableName", (req, res) => {
 
 // delete data from table
 route.delete("/delete-row/:tableName", (req, res) => {
-  var sql = `delete from ${req.params.tableName} where ${req.body.columnName} = '${req.body.columnValue}'`;
+  var sql = `delete from ${req.params.tableName} where "${req.body.columnName}" = '${req.body.columnValue}'`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     return res.status(200).send(result);
@@ -43,7 +43,7 @@ route.delete("/delete-row/:tableName", (req, res) => {
 
 // update data in table
 route.put("/update/:tableName", (req, res) => {
-  var sql = `update ${req.params.tableName} set ? where ${req.body.columnName} = '${req.body.columnValue}'`;
+  var sql = `update ${req.params.tableName} set ? where "${req.body.columnName}" = '${req.body.columnValue}'`;
   db.query(sql, req.body, (err, result) => {
     if (err) throw err;
     // return res.status(200).send(result);

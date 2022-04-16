@@ -3,7 +3,7 @@ const db = require("../models");
 
 // delete column from table
 route.delete("/:tableName", (req, res) => {
-  var sql = `alter table ${req.params.tableName} drop column ${req.body.columnName}`;
+  var sql = `alter table ${req.params.tableName} drop column "${req.body.columnName}"`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     // return res.status(200).send(result);

@@ -21,4 +21,14 @@ route.put("/alter-column-type/:tableName", (req, res) => {
   });
 });
 
+// rename column name
+route.put("/rename-column/:tableName", (req, res) => {
+  var sql = `alter table ${req.params.tableName} change "${req.body.oldColumnName}" "${req.body.newColumnName}" ${req.body.columnType}`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    // return res.status(200).send(result);
+    return res.status(200).send("Successfully");
+  });
+});
+
 module.exports = route;

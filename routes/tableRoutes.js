@@ -32,12 +32,12 @@ route.get("/column-name/:tableName", (req, res) => {
 });
 
 // delete data from table
-route.delete("/delete/:tableName", (req, res) => {
-  var sql = `delete from ${req.params.tableName}`;
+route.delete("/delete-row/:tableName", (req, res) => {
+  var sql = `delete from ${req.params.tableName} where ${req.body.columnName} = '${req.body.columnValue}'`;
   db.query(sql, (err, result) => {
     if (err) throw err;
-    // return res.status(200).send(result);
-    return res.status(200).send("Successfully");
+    return res.status(200).send(result);
+    // return res.status(200).send("Successfully");
   });
 });
 

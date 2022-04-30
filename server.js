@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
 
+const cors = require("cors");
+
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method"));
+
+app.use(cors());
+
 const db = require("./models");
 
 app.use(
